@@ -38,7 +38,6 @@ def handler(context: dict, request: Request) -> Response:
     text_prompt = request.json.get("prompt")
     model = context.get("model")
 
-
     image_pil = Image.open("banana.png").convert("RGB")
     image_array = np.asarray(image_pil)
     masks, boxes, phrases, logits = model.predict(image_pil, text_prompt, box_threshold, text_threshold)
