@@ -10,17 +10,14 @@ import base64
 from PIL import Image
 import io
 import os
-from dotenv import load_dotenv
 import boto3
-
-load_dotenv()
 
 app = Potassium("lang-segment-anything")
 
-AWS_ID = os.getenv("AWS_ID")
-AWS_KEY = os.getenv("AWS_KEY")
-AWS_REGION = os.getenv("AWS_REGION")
-AWS_BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
+AWS_ACCESS = os.getenv('AWS_ACCESS')
+AWS_BUCKET = os.getenv('AWS_BUCKET')
+AWS_REGION = os.getenv('AWS_REGION')
+AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
@@ -44,18 +41,19 @@ def handler(context: dict, request: Request) -> Response:
     labels = [f"{phrase} {logit:.2f}" for phrase, logit in zip(phrases, logits)]
     image = draw_image(image_array, masks, boxes, labels)
     image = Image.fromarray(np.uint8(image)).convert("RGB")
-    image.save('output.png')
+    image.save('output2.png')
+    filename='output2.png'
     #upload to s3
     session = boto3.Session(
-        aws_access_key_id=AWS_ID,
-        aws_secret_access_key=AWS_KEY,
+        aws_access_key_id=AWS_ACCESS,
+        aws_secret_access_key=AWS_SECRET,
         region_name=AWS_REGION
     )
     s3 = session.client('s3')
-    bucket_name = AWS_BUCKET_NAME
-    with open("output.png", 'rb') as data:
-        s3.upload_fileobj(data, bucket_name, "output.png")
-    url = f"https://{bucket_name}.s3.amazonaws.com/djasjdmaklmflln"
+    bucket_name = AWS_BUCKET
+    with open(filename, 'rb') as data:
+        s3.upload_fileobj(data, bucket_name, filename)
+    url = f"https://{bucket_name}.s3.amazonaws.com/{filename}"
 
     return Response(json={"output": url}, status=200)
 
