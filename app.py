@@ -32,7 +32,6 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
-    #cc
     print("PyTorch version:", torch.__version__)
     print("CUDA version:", torch.version.cuda)
     # Log PyTorch and CUDA versions
