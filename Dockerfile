@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get -y install git cmake g++ libgl1-mesa-glx libglib2.0-0 wget
 
 # Install cudatoolkit-dev
-RUN conda install -c conda-forge cudatoolkit-dev
+RUN conda install -y -c conda-forge cudatoolkit-dev
 
 RUN pip3 install --upgrade pip
 # Clone and install lang-segment-anything
