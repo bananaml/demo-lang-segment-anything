@@ -13,6 +13,7 @@ RUN apt-get update && \
 
 # Install cudatoolkit-dev
 #RUN conda install -y -c conda-forge cudatoolkit-dev
+RUN conda install -y -c conda-forge cudatoolkit=11.3
 
 RUN pip3 install --upgrade pip
 # Clone and install lang-segment-anything
