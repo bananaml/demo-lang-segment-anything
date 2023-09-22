@@ -32,9 +32,10 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
+    #cc
     print("PyTorch version:", torch.__version__)
     print("CUDA version:", torch.version.cuda)
-     # Log PyTorch and CUDA versions
+    # Log PyTorch and CUDA versions
     logging.info("PyTorch version: %s", torch.__version__)
     logging.info("CUDA version: %s", torch.version.cuda)
     # Check GPU availability
@@ -49,11 +50,6 @@ def handler(context: dict, request: Request) -> Response:
         print("GPU device name:", torch.cuda.get_device_name(0))
     else:
         print("No GPU available.")
-
-        
-
-
-
     image_base64 = request.json.get("image")
     box_threshold = request.json.get("box_threshold")
     text_threshold = request.json.get("text_threshold")
