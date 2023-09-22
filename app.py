@@ -38,8 +38,7 @@ def handler(context: dict, request: Request) -> Response:
     text_prompt = request.json.get("prompt")
     model = context.get("model")
 
-
-
+    
     image_pil = Image.open("banana.png").convert("RGB")
     image_array = np.asarray(image_pil)
     masks, boxes, phrases, logits = model.predict(image_pil, text_prompt, box_threshold, text_threshold)
@@ -47,9 +46,6 @@ def handler(context: dict, request: Request) -> Response:
     image = draw_image(image_array, masks, boxes, labels)
     image = Image.fromarray(np.uint8(image)).convert("RGB")
     image.save('output.png')
-
-
-
     #upload to s3
     session = boto3.Session(
         aws_access_key_id=AWS_ID,
