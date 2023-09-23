@@ -17,9 +17,15 @@ RUN conda install -y -c conda-forge cudatoolkit-dev
 
 RUN pip install --upgrade pip
 RUN pip install potassium
-# Clone lang-segment-anything
-RUN git clone https://github.com/luca-medeiros/lang-segment-anything
 
+RUN git clone https://github.com/luca-medeiros/lang-segment-anything && \
+    cd lang-segment-anything && \
+    pip install torch torchvision && \
+    pip install -e .
+# Clone lang-segment-anything
+#RUN git clone https://github.com/luca-medeiros/lang-segment-anything
+#pip install torch torchvision
+#pip install -e .
 # Install Python dependencies
 #ADD requirements.txt requirements.txt
 #RUN pip3 install -r requirements.txt

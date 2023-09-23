@@ -1,6 +1,4 @@
 #from lang_sam import LangSAM
-
-
 def download_model():
     #model = LangSAM()
     pass
