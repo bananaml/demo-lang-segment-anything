@@ -13,6 +13,7 @@ import os
 import boto3
 import torch 
 import logging
+import subprocess
 
 app = Potassium("lang-segment-anything")
 
@@ -23,6 +24,7 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
+    subprocess.run(["bash", "/install.sh"], check=True)
     model = LangSAM()
     context = {
         "model":model
