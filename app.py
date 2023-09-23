@@ -14,6 +14,7 @@ import boto3
 import torch 
 import logging
 import subprocess
+logging.basicConfig(level=logging.DEBUG)
 
 app = Potassium("lang-segment-anything")
 
@@ -24,7 +25,6 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
-    logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
     logger.info('Initializing the application and calling install.sh...')    
     #cannnot be find / no rights for executing / 
@@ -45,6 +45,16 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
+    logger = logging.getLogger(__name__)
+    logger.info('Initializing the application and calling install.sh...')    
+    #cannnot be find / no rights for executing / 
+    result = subprocess.run(["bash", "/install.sh"], check=True)
+    print("Output:", result.stdout)
+    print("Error:", result.stderr)
+
+    current_directory = os.getcwd()
+    logger.info(f"Current directory: {current_directory}")
+    logger.info("Directory contents:")
     image_base64 = request.json.get("image")
     box_threshold = request.json.get("box_threshold")
     text_threshold = request.json.get("text_threshold")
