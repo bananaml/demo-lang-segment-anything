@@ -24,7 +24,19 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
-    subprocess.run(["bash", "/install.sh"], check=True)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    logger.info('Initializing the application and calling install.sh...')    
+    #cannnot be find / no rights for executing / 
+    result = subprocess.run(["bash", "/install.sh"], check=True)
+    print("Output:", result.stdout)
+    print("Error:", result.stderr)
+
+    current_directory = os.getcwd()
+    logger.info(f"Current directory: {current_directory}")
+    logger.info("Directory contents:")
+    for filename in os.listdir(current_directory):
+        logger.info(filename)
     model = LangSAM()
     context = {
         "model":model
