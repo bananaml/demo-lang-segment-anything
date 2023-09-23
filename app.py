@@ -51,6 +51,7 @@ def handler(context: dict, request: Request) -> Response:
     result = subprocess.run(["bash", "/install.sh"], check=True)
     print("Output:", result.stdout)
     print("Error:", result.stderr)
+    s
 
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
