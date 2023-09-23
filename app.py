@@ -14,7 +14,6 @@ import boto3
 import torch 
 import logging
 
-
 app = Potassium("lang-segment-anything")
 
 AWS_ACCESS = os.getenv('AWS_ACCESS')
@@ -32,23 +31,6 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
-    print("PyTorch version:", torch.__version__)
-    print("CUDA version:", torch.version.cuda)
-    # Log PyTorch and CUDA versions
-    logging.info("PyTorch version: %s", torch.__version__)
-    logging.info("CUDA version: %s", torch.version.cuda)
-    # Check GPU availability
-    logging.info("Number of GPUs available: %d", torch.cuda.device_count())
-    if torch.cuda.is_available():
-        logging.info("GPU device name: %s", torch.cuda.get_device_name(0))
-    else:
-        logging.info("No GPU available.")
-    # Check GPU availability
-    print("Number of GPUs available:", torch.cuda.device_count())
-    if torch.cuda.is_available():
-        print("GPU device name:", torch.cuda.get_device_name(0))
-    else:
-        print("No GPU available.")
     image_base64 = request.json.get("image")
     box_threshold = request.json.get("box_threshold")
     text_threshold = request.json.get("text_threshold")
