@@ -8,6 +8,6 @@ fi
 # Clone and install lang-segment-anything
 git clone https://github.com/luca-medeiros/lang-segment-anything 
 cd lang-segment-anything
-pip uninstall torch torchvision 
-pip install torch torchvision 
+#pip uninstall torch torchvision 
+#pip install torch torchvision 
 pip install -e .

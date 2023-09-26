@@ -1,4 +1,5 @@
 from potassium import Potassium, Request, Response
+import uuid
 from PIL import Image
 from lang_sam import LangSAM
 import numpy as np
@@ -26,12 +27,11 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 @app.init
 def init():
     logger = logging.getLogger(__name__)
-    logger.info('Initializing the application and calling install.sh...')    
+    logger.info('Initializing the application and calling install.sh new iteration...')    
     #cannnot be find / no rights for executing / 
     result = subprocess.run(["bash", "/install.sh"], check=True)
     print("Output:", result.stdout)
     print("Error:", result.stderr)
-
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
     logger.info("Directory contents:")
@@ -46,13 +46,7 @@ def init():
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
     logger = logging.getLogger(__name__)
-    logger.info('Initializing the application and calling install.sh...')    
-    #cannnot be find / no rights for executing / 
-    result = subprocess.run(["bash", "/install.sh"], check=True)
-    print("Output:", result.stdout)
-    print("Error:", result.stderr)
-    s
-
+    logger.info("new iteration:")
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
     logger.info("Directory contents:")
@@ -67,7 +61,6 @@ def handler(context: dict, request: Request) -> Response:
     labels = [f"{phrase} {logit:.2f}" for phrase, logit in zip(phrases, logits)]
     image = draw_image(image_array, masks, boxes, labels)
     image = Image.fromarray(np.uint8(image)).convert("RGB")
-    import uuid
     filename = str(uuid.uuid4()) + '.png'
     image.save(filename)
     #image.save('output2.png')
