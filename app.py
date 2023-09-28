@@ -30,17 +30,20 @@ def handler(context: dict, request: Request) -> Response:
     logger = logging.getLogger(__name__)
     logger.info("start handler:")
     logger.info("run check_gpu.py:")
-    subprocess.run(["python", "check_gpu.py"], check=True)
+    subprocess.run(["python3", "check_gpu.py"], check=True)
     os.chdir("lang-segment-anything")
     logger.info("run torch:")
     subprocess.run(["pip", "install", "-v", "torch", "torchvision"], check=True)
     logger.info("run -e:")
     subprocess.run(["pip", "install", "-v", "-e", "."], check=True)
     os.chdir("..")
+    installed_packages = subprocess.check_output(["pip", "freeze"])
+    installed_packages = installed_packages.decode("utf-8")
+    logger.info(f"Installed packages: {installed_packages}")
     current_directory = os.getcwd()
-    logger.info(f"Current directory: {current_directory}")
+    """logger.info(f"Current directory: {current_directory}")
     for file in os.listdir(current_directory):
-        logger.info(file)
+        logger.info(file)"""
     from lang_sam import LangSAM
     from lang_sam import LangSAM
     from lang_sam import SAM_MODELS

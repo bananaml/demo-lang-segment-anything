@@ -33,4 +33,5 @@ EXPOSE 8000
 
 #CMD ["sh", "-c", "python check_gpu.py && cd lang-segment-anything && pip install -v torch torchvision && pip install -v -e . && cd .. && python -u app.py"]
 #CMD ["sh", "-c", "python check_gpu.py && pip install -v torch torchvision && pip install -v -e . && python -u app.py"]
-CMD python3 -u app.py
+CMD ["sh", "-c", "python check_gpu.py && pip install -v torch torchvision && pip install -v -e . && python -u app.py"]
+#CMD python3 -u app.py
