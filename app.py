@@ -21,14 +21,7 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
-    from lang_sam import LangSAM
-    from lang_sam import LangSAM
-    from lang_sam import SAM_MODELS
-    from lang_sam.utils import draw_image
-    from lang_sam.utils import load_image
-    model = LangSAM()
     context = {
-        "model":model
     }
     return context
 
@@ -39,6 +32,7 @@ def handler(context: dict, request: Request) -> Response:
     from lang_sam import SAM_MODELS
     from lang_sam.utils import draw_image
     from lang_sam.utils import load_image
+    model = LangSAM()
     logger = logging.getLogger(__name__)
     logger.info("new iteration:")
     current_directory = os.getcwd()
@@ -48,7 +42,7 @@ def handler(context: dict, request: Request) -> Response:
     box_threshold = request.json.get("box_threshold")
     text_threshold = request.json.get("text_threshold")
     text_prompt = request.json.get("prompt")
-    model = context.get("model")
+    #model = context.get("model")
     image_pil = Image.open("banana.png").convert("RGB")
     image_array = np.asarray(image_pil)
     masks, boxes, phrases, logits = model.predict(image_pil, text_prompt, box_threshold, text_threshold)
