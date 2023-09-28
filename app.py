@@ -1,12 +1,7 @@
 from potassium import Potassium, Request, Response
 import uuid
 from PIL import Image
-from lang_sam import LangSAM
 import numpy as np
-from lang_sam import LangSAM
-from lang_sam import SAM_MODELS
-from lang_sam.utils import draw_image
-from lang_sam.utils import load_image
 import base64
 from PIL import Image
 import io
@@ -26,6 +21,11 @@ AWS_SECRET = os.getenv('AWS_SECRET')
 
 @app.init
 def init():
+    from lang_sam import LangSAM
+    from lang_sam import LangSAM
+    from lang_sam import SAM_MODELS
+    from lang_sam.utils import draw_image
+    from lang_sam.utils import load_image
     model = LangSAM()
     context = {
         "model":model
@@ -34,6 +34,11 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
+    from lang_sam import LangSAM
+    from lang_sam import LangSAM
+    from lang_sam import SAM_MODELS
+    from lang_sam.utils import draw_image
+    from lang_sam.utils import load_image
     logger = logging.getLogger(__name__)
     logger.info("new iteration:")
     current_directory = os.getcwd()
