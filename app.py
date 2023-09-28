@@ -37,10 +37,10 @@ def handler(context: dict, request: Request) -> Response:
     logger.info("run -e:")
     subprocess.run(["pip", "install", "-v", "-e", "."], check=True)
     os.chdir("..")"""
-    installed_packages = subprocess.check_output(["pip", "freeze"])
+    """installed_packages = subprocess.check_output(["pip", "freeze"])
     installed_packages = installed_packages.decode("utf-8")
     logger.info(f"Installed packages: {installed_packages}")
-    current_directory = os.getcwd()
+    current_directory = os.getcwd()"""
     """logger.info(f"Current directory: {current_directory}")
     for file in os.listdir(current_directory):
         logger.info(file)"""
