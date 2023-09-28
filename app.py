@@ -31,10 +31,12 @@ def handler(context: dict, request: Request) -> Response:
     logger.info("start handler:")
     logger.info("run check_gpu.py:")
     subprocess.run(["python", "check_gpu.py"], check=True)
+    os.chdir("lang-segment-anything")
     logger.info("run torch:")
     subprocess.run(["pip", "install", "-v", "torch", "torchvision"], check=True)
     logger.info("run -e:")
     subprocess.run(["pip", "install", "-v", "-e", "."], check=True)
+    os.chdir("..")
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
     for file in os.listdir(current_directory):
