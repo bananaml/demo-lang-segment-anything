@@ -27,6 +27,10 @@ def init():
 
 @app.handler()
 def handler(context: dict, request: Request) -> Response:
+    logger = logging.getLogger(__name__)
+    logger.info("start handler:")
+    current_directory = os.getcwd()
+    logger.info(f"Current directory: {current_directory}")
     from lang_sam import LangSAM
     from lang_sam import LangSAM
     from lang_sam import SAM_MODELS
