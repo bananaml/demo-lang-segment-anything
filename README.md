@@ -24,9 +24,8 @@ inputs = {
     "image": "image_string_base64",
     "box_threshold": "your_box_threshold",
     "text_threshold": "your_text_threshold",
-    "promt": "your_text_prompt"
+    "prompt": "your_text_prompt"
 }
 ```
 
 For more info, check out the [Banana.dev docs](https://docs.banana.dev/banana-docs/).
-
