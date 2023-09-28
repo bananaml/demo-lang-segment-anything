@@ -15,7 +15,10 @@ RUN conda install -y -c conda-forge cudatoolkit-dev
 RUN pip install --upgrade pip
 RUN pip install potassium
 
+
 RUN git clone https://github.com/luca-medeiros/lang-segment-anything
+
+WORKDIR /lang-segment-anything
 
 ENV AWS_ACCESS=${AWS_ACCESS}
 ENV AWS_BUCKET=${AWS_BUCKET}
@@ -29,4 +32,5 @@ ADD . .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python check_gpu.py && cd lang-segment-anything && pip install -v torch torchvision && pip install -v -e . && cd .. && python -u app.py"]
+#CMD ["sh", "-c", "python check_gpu.py && cd lang-segment-anything && pip install -v torch torchvision && pip install -v -e . && cd .. && python -u app.py"]
+CMD ["sh", "-c", "python check_gpu.py && pip install -v torch torchvision && pip install -v -e . && python -u app.py"]
