@@ -33,7 +33,7 @@ def handler(context: dict, request: Request) -> Response:
     logger.info(f"Current directory: {current_directory}")
     for file in os.listdir(current_directory):
         logger.info(file)
-        if file == "cmd.sh":
+        if file == "Dockerfile":
             with open(file, 'r') as f:
                 content = f.read()
                 logger.info(f"Content of {file}: {content}")
