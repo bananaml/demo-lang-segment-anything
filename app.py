@@ -29,14 +29,16 @@ def init():
 def handler(context: dict, request: Request) -> Response:
     logger = logging.getLogger(__name__)
     logger.info("start handler:")
+    logger.info("run check_gpu.py:")
+    subprocess.run(["python", "check_gpu.py"], check=True)
+    logger.info("run torch:")
+    subprocess.run(["pip", "install", "-v", "torch", "torchvision"], check=True)
+    logger.info("run -e:")
+    subprocess.run(["pip", "install", "-v", "-e", "."], check=True)
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
     for file in os.listdir(current_directory):
         logger.info(file)
-        if file == "Dockerfile":
-            with open(file, 'r') as f:
-                content = f.read()
-                logger.info(f"Content of {file}: {content}")
     from lang_sam import LangSAM
     from lang_sam import LangSAM
     from lang_sam import SAM_MODELS
