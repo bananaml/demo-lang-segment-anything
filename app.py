@@ -31,6 +31,8 @@ def handler(context: dict, request: Request) -> Response:
     logger.info("start handler:")
     current_directory = os.getcwd()
     logger.info(f"Current directory: {current_directory}")
+    for file in os.listdir(current_directory):
+        logger.info(file)
     from lang_sam import LangSAM
     from lang_sam import LangSAM
     from lang_sam import SAM_MODELS
